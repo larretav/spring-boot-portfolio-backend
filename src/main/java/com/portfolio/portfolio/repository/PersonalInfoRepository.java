@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.portfolio.portfolio.model.PersonalInfo;
@@ -96,9 +96,20 @@ public class PersonalInfoRepository implements IPersonalInfoRepository {
 
   }
 
+  // Opcion 1
+  // @Override
+  // public Optional<PersonalInfo> findById(Long id) {
+  // String sql = "SELECT * FROM personal_info WHERE id = ?";
+  // return jdbcTemplate.query(sql, personalInfoRowMapper).stream().findFirst();
+  // }
   @Override
   public Optional<PersonalInfo> findById(Long id) {
-    throw new UnsupportedOperationException("Unimplemented method 'findById'");
+    try {
+      String sql = "SELECT * FROM personal_info WHERE id = ?";
+      return Optional.ofNullable(jdbcTemplate.queryForObject(sql, personalInfoRowMapper, id));
+    } catch (EmptyResultDataAccessException e) {
+      return Optional.empty();
+    }
   }
 
   @Override
