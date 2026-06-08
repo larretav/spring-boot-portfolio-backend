@@ -16,6 +16,7 @@ public class Education {
   private String institution;
   private LocalDate startDate;
   private LocalDate endDate;
+  private String description;
   private Long personalInfoId;
 
 }

@@ -3,9 +3,12 @@ package com.portfolio.portfolio.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.portfolio.portfolio.model.PersonalInfo;
 import com.portfolio.portfolio.repository.IPersonalInfoRepository;
 
+@Service
 public class PersonalInfoService implements IPersonalInfoService {
 
   private final IPersonalInfoRepository personalInfoRepository;

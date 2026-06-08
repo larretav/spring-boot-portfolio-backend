@@ -26,7 +26,7 @@ public class PersonalInfoRepository implements IPersonalInfoRepository {
     personalInfo.setFirstName(rs.getString("first_name"));
     personalInfo.setLastName(rs.getString("last_name"));
     personalInfo.setEmail(rs.getString("email"));
-    personalInfo.setPhoneNumber(rs.getString("phone_number"));
+    personalInfo.setPhoneNumber(rs.getString("phone"));
     personalInfo.setTitle(rs.getString("title"));
     personalInfo.setProfileDescription(rs.getString("profile_description"));
     personalInfo.setProfileImageUrl(rs.getString("profile_image_url"));
@@ -39,7 +39,7 @@ public class PersonalInfoRepository implements IPersonalInfoRepository {
   @Override
   public PersonalInfo save(PersonalInfo personalInfo) {
     if (personalInfo.getId() == null) {
-      String sql = "INSERT INTO personal_info (first_name, last_name, title, profile_description, profile_image_url, years_of_experience, email, phone_number, linkedin_url, github_url) "
+      String sql = "INSERT INTO personal_info (first_name, last_name, title, profile_description, profile_image_url, years_of_experience, email, phone, linkedin_url, github_url) "
           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
       var keyHolder = new GeneratedKeyHolder();
@@ -77,7 +77,7 @@ public class PersonalInfoRepository implements IPersonalInfoRepository {
       // personalInfo.getGithubUrl());
       // return personalInfo;
     } else {
-      String sql = "UPDATE personal_info SET first_name = ?, last_name = ?, title = ?, profile_description = ?, profile_image_url = ?, years_of_experience = ?, email = ?, phone_number = ?, linkedin_url = ?, github_url = ? "
+      String sql = "UPDATE personal_info SET first_name = ?, last_name = ?, title = ?, profile_description = ?, profile_image_url = ?, years_of_experience = ?, email = ?, phone = ?, linkedin_url = ?, github_url = ? "
           + "WHERE id = ?";
       jdbcTemplate.update(sql,
           personalInfo.getFirstName(),
