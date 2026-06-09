@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.portfolio.portfolio.model.PersonalInfo;
 import com.portfolio.portfolio.service.IPersonalInfoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/personal-info")
@@ -31,12 +33,12 @@ public class PersonalInfoController {
   }
 
   @GetMapping("/{id}")
-  public PersonalInfo getPersonalInfoById(@PathVariable Long id) {
+  public ResponseEntity<PersonalInfo> getPersonalInfoById(@PathVariable Long id) {
     var info = personalInfoService.findById(id);
     if (info.isPresent()) {
-      return info.get();
+      return new ResponseEntity<>(info.get(), HttpStatus.OK);
     } else {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Inforamción personal no encontrada");
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
 
@@ -45,6 +47,17 @@ public class PersonalInfoController {
     var newPersonalInfo = personalInfoService.save(entity);
 
     return new ResponseEntity<>(newPersonalInfo, HttpStatus.CREATED);
+  }
+
+  @PutMapping("/{id}")
+  public PersonalInfo updatePersonalInfo(@PathVariable Long id, @RequestBody PersonalInfo personalInfo) {
+    personalInfo.setId(id);
+    return personalInfoService.save(personalInfo);
+  }
+
+  @DeleteMapping("/{id}")
+  public void deletePersonalInfo(@PathVariable Long id) {
+    personalInfoService.deleteById(id);
   }
 
 }

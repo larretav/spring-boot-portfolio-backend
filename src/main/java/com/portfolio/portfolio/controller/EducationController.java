@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.portfolio.portfolio.model.Education;
+import com.portfolio.portfolio.model.Experience;
+import com.portfolio.portfolio.model.PersonalInfo;
 import com.portfolio.portfolio.service.IEducationService;
 
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -31,12 +35,12 @@ public class EducationController {
   }
 
   @GetMapping("/{id}")
-  public Education getEducationById(@PathVariable Long id) {
+  public ResponseEntity<Education> getEducationById(@PathVariable Long id) {
     var education = educationService.findById(id);
     if (education.isPresent()) {
-      return education.get();
+      return new ResponseEntity<>(education.get(), HttpStatus.OK);
     } else {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Educación no encontrada");
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
 
@@ -47,4 +51,14 @@ public class EducationController {
     return new ResponseEntity<>(newEducation, HttpStatus.CREATED);
   }
 
+  @PutMapping("/{id}")
+  public Education updateEducation(@PathVariable Long id, @RequestBody Education education) {
+    education.setId(id);
+    return educationService.save(education);
+  }
+
+  @DeleteMapping("/{id}")
+  public void deleteEducation(@PathVariable Long id) {
+    educationService.deleteById(id);
+  }
 }

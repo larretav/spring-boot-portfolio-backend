@@ -120,7 +120,7 @@ public class PersonalInfoRepository implements IPersonalInfoRepository {
 
   @Override
   public void deleteById(Long id) {
-    String sql = "DELETE * FROM personal_info WHERE id = ?";
+    String sql = "DELETE FROM personal_info WHERE id = ?";
     jdbcTemplate.update(sql, id);
   }
 
