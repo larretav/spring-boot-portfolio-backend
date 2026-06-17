@@ -1,5 +1,6 @@
 package com.portfolio.portfolio.model;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,12 +33,12 @@ public class PersonalInfo {
 
   private String profileImageUrl;
 
-  @NotBlank(message = "Los años de experiencia son obligatorios")
+  @Min(value = 0, message = "Los años de experiencia son obligatorios")
   private Integer yearsOfExperience;
 
   @NotBlank(message = "El enlace de LinkedIn es obligatorio")
   private String linkedinUrl;
-  
+
   @NotBlank(message = "El enlace de GitHub es obligatorio")
   private String githubUrl;
 

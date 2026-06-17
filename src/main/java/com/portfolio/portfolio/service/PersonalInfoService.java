@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Validator;
 
+import com.portfolio.portfolio.exception.ValidationException;
 import com.portfolio.portfolio.model.PersonalInfo;
 import com.portfolio.portfolio.repository.IPersonalInfoRepository;
 
@@ -24,8 +25,7 @@ public class PersonalInfoService implements IPersonalInfoService {
     var result = new BeanPropertyBindingResult(personalInfo, "personalInfo");
     validator.validate(personalInfo, result);
     if (result.hasErrors()) {
-      System.out.println("Errores encontrados: " + result.getAllErrors());
-      throw new IllegalArgumentException("Los datos proporcionados no son válidos");
+      throw new ValidationException(result);
     }
 
     return personalInfoRepository.save(personalInfo);
