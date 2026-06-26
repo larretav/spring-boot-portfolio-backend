@@ -51,7 +51,7 @@ public class PersonalInfoRepository implements IPersonalInfoRepository {
         ps.setString(3, personalInfo.getTitle());
         ps.setString(4, personalInfo.getProfileDescription());
         ps.setString(5, personalInfo.getProfileImageUrl());
-        if (personalInfo.getYearsOfExperience() == null) {
+        if (personalInfo.getYearsOfExperience() != null) {
           ps.setInt(6, personalInfo.getYearsOfExperience());
         } else {
           ps.setNull(6, java.sql.Types.INTEGER);

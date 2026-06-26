@@ -3,6 +3,9 @@ package com.portfolio.portfolio.dtos;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import lombok.Data;
+
+@Data
 public class ErrorResponse {
   private int status;
   private String message;

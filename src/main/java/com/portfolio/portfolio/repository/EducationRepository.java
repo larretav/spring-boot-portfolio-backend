@@ -92,7 +92,7 @@ public class EducationRepository implements IEducationRepository {
 
   @Override
   public List<Education> findByPersonalInfoId(Long personalInfoId) {
-    var sql = "SELECT * FROM educations WHERE personal_info_id = ?";
+    var sql = "SELECT * FROM educations WHERE educations = ?";
     return jdbcTemplate.query(sql, educationRowMapper, personalInfoId);
   }
 
