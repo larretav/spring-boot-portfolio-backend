@@ -1,5 +1,7 @@
 package com.portfolio.portfolio.model;
 
+import org.hibernate.validator.constraints.URL;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -36,10 +38,10 @@ public class PersonalInfo {
   @Min(value = 0, message = "Los años de experiencia son obligatorios")
   private Integer yearsOfExperience;
 
-  @NotBlank(message = "El enlace de LinkedIn es obligatorio")
+  @URL(message = "El enlace de LinkedIn es obligatorio")
   private String linkedinUrl;
 
-  @NotBlank(message = "El enlace de GitHub es obligatorio")
+  @URL(message = "El enlace de GitHub es obligatorio")
   private String githubUrl;
 
 }
