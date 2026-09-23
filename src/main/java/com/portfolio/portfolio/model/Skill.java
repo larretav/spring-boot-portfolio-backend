@@ -15,7 +15,7 @@ public class Skill {
 
   private Long id;
 
-  @NotBlank(message = "El nombre es obligatorio")
+  @NotBlank(message = "El nombre es obligatorio.")
   private String name;
 
   @NotNull(message = "El porcentaje es obligatorio")

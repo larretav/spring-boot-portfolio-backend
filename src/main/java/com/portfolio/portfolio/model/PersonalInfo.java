@@ -41,7 +41,7 @@ public class PersonalInfo {
   @URL(message = "El enlace de LinkedIn es obligatorio")
   private String linkedinUrl;
 
-  @URL(message = "El enlace de GitHub es obligatorio")
+  @URL(message = "El enlace de GitHub es obligatorio.")
   private String githubUrl;
 
 }
